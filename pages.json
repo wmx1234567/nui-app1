@@ -1,0 +1,100 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/classification/classification",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		}, {
+			"path": "pages/read/read",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/qa/qa",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/my/my",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "components/components/head-search/head-search",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}
+	    ,{
+            "path" : "components/components/HotList/HotList",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8",
+		"app-plus": {
+			"titleNView": false
+		}
+	},
+	"tabBar": {
+		"color": "#7A7E83",
+		"selectedColor": "#007AFF",
+		"borderStyle": "black",
+		"backgroundColor": "#F8F8F8",
+		"list": [{
+				"pagePath": "pages/index/index",
+				"text": "首页",
+				"iconPath": "./static/首页-fill.png",
+				"selectedIconPath": "./static/首页-fill (1).png"
+			},
+			{
+				"pagePath": "pages/classification/classification",
+				"text": "分类",
+				"iconPath": "static/分类.png",
+				"selectedIconPath": "./static/分类 (1).png"
+			},
+			{
+				"pagePath": "pages/read/read",
+				"text": "阅读",
+				"iconPath": "./static/阅读.png",
+				"selectedIconPath": "./static/阅读 (1).png"
+			},
+			{
+				"pagePath": "pages/qa/qa",
+				"text": "问答",
+				"iconPath": "./static/问答.png",
+				"selectedIconPath": "./static/问答 (1).png"
+			},
+			{
+				"pagePath": "pages/my/my",
+				"text": "我的",
+				"iconPath": "./static/我的-我的.png",
+				"selectedIconPath": "./static/我的-我的 (1).png"
+			}
+		]
+	},
+	"uniIdRouter": {}
+}
