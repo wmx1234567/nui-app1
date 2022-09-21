@@ -31,7 +31,7 @@
 		align-items: center;
 		justify-content: center;
 
-		height: 60rpx;
+		height: 100rpx;
 		color: #777;
 		position: fixed;
 		top: 0;
@@ -39,11 +39,11 @@
 
 		.input {
 			width: 96%;
-			border-radius: 20px;
+			border-radius: 40rpx;
 			background-color: #fff;
-			font-size: 14rpx;
-			height: 45rpx;
-			line-height: 45rpx;
+			font-size: 26rpx;
+			height: 60rpx;
+			line-height: 60rpx;
 			text-align: center;
 
 			img {

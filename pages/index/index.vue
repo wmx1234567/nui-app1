@@ -15,17 +15,26 @@
 		</ul>
 	</view>
 	<HotList :title="Hottitle" :list="Hotlist"></HotList>
+	<released></released>
 	<HotList :title="Mtitle" :list="Hotlist"></HotList>
+	<pay></pay>
+	<Back :scrollTop="scrollTop"></Back>
+	<!-- <img class="top" @click="backtop" v-show="scrollTop>=800" src="https://www.mescroll.com/img/mescroll-totop.png" > -->
 </template>
 
 <script>
+	import Back from '../../components/components/Back-top/Back-top.vue'
 	//热门推荐接口
 	import {
 		list
 	} from '@/api/api.js';
 	import {
-		onPageScroll
+		onPageScroll,onPullDownRefresh
 	} from '@dcloudio/uni-app'
+	//付费精选组件
+	import pay from '../../components/components/pay/pay.vue'
+	//近期上映组件
+	import released from '../../components/components/released/released.vue'
 	// 列表组件
 	import HotList from '../../components/components/HotList/HotList.vue'
 	// 头部组件
@@ -40,7 +49,10 @@
 	export default {
 		components: {
 			myinput,
-			HotList
+			HotList,
+			released,
+			pay,
+			Back
 		},
 		setup() {
 			const data = reactive({
@@ -59,11 +71,12 @@
 				], // 轮播图数据
 				clock: '#345dc2', //背景颜色
 				fication: [], // 分类数据
-				scrollTop: 0,
+				scrollTop: 0, //滚动条高度
 				Hottitle: '热门推荐', //热门推荐
 				Hotlist: [], //热门推荐数据
 				Mtitle: '免费精选', //免费精选
 				mlist: [], //免费精选数据
+				eid: 0,
 			})
 			list({
 				current: 1,
@@ -74,8 +87,8 @@
 				data.Hotlist = res.data.records
 			})
 			list({
-				current: 1,
-				size: 10,
+				current: 2,
+				size: 6,
 				isFree: 1
 			}).then(res => {
 				console.log(res.data.records);
@@ -83,12 +96,24 @@
 			})
 			onPageScroll((e) => {
 				data.scrollTop = e.scrollTop
+				if (data.scrollTop > 30) {
+					data.clock = '#345dc2'
+				} else {
+					if (data.eid == 0) {
+						data.clock = '#45328c'
+					} else if (data.eid == 1) {
+						data.clock = '#006C00'
+					} else {
+						data.clock = '#0072B7'
+					}
+				}
 			})
 			swiper().then(res => {
 				console.log(res.data);
 				data.fication = res.data
 			})
 			const img = (e) => {
+				data.eid = e.detail.current
 				// console.log(e.detail.current);
 				if (data.scrollTop > 30) {
 					data.clock = '#345dc2'
@@ -103,9 +128,22 @@
 				}
 
 			}
+			// const backtop =()=>{
+			// 	let a = document.documentElement.scrollTop;
+			// 	let timer = setInterval(() => {
+			// 	if (a > 0) {
+			// 	a -= 100;
+			// 	window.scrollTo(0, a);
+			// 	} else {
+			// 	clearInterval(timer);
+			// 	}
+			// 	}, 10);
+			// }
+			
 			return {
 				...toRefs(data),
-				img
+				img,
+				
 			}
 		}
 
@@ -152,7 +190,7 @@
 
 	.swiper {
 		height: 300rpx;
-		margin-top: 60rpx;
+		margin-top: 100rpx;
 	}
 
 	.swiper-item {
@@ -188,5 +226,13 @@
 		border-radius: 20rpx;
 		height: 92%;
 		margin-top: 20rpx;
+	}
+	.top{
+		position: fixed;
+		right: 20rpx;
+		top: 80%;
+		width: 80rpx;
+		height: 80rpx;
+		border-radius: 50%;
 	}
 </style>
