@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<myinput :clock="clock"></myinput>
-		<Back></Back>
+		<Back :scrollTop="scrollTop"></Back>
 		<view class="top">
 			<scroll-view class="scroll-view_H" scroll-x="true" scroll-left="0">
 				<view @click="highlight(-1)" class="scroll-view-item_H uni-bg-red" :class="{bor:id==-1}"><span></span>
@@ -28,9 +28,9 @@
 						</view>
 					</view>
 				</view>
-				<view class="right" v-show="item.mainImage!=null">
-					<img 
-						:src="item.mainImage.slice(-3)=='jpg'?`../../../static/${item.mainImage}` :item.mainImage">
+				<view class="right" v-if="item.imageUrl !=null">
+					<!-- <img src="../../static/static/images/banner1.jpg" alt=""> -->
+					<img :src="item.imageUrl.slice(0,5)=='https'? item.imageUrl:`../../static/${item.imageUrl}`">
 				</view>
 			</view>
 		</view>
@@ -40,7 +40,7 @@
 <script>
 	import {
 		swiper,
-		list
+		list1
 	} from '../../api/api.js';
 	import { onPageScroll } from '@dcloudio/uni-app'
 	import Back from '../../components/components/Back-top/Back-top.vue'
@@ -68,12 +68,12 @@
 			})
 			const highlight = (i) => {
 				data.id = i
-				list({categoryId: i, current: 1, size: 10}).then(res => {
+				list1({categoryId: i, current: 1, size: 10}).then(res => {
 					console.log(res.data.records,123123);
 					data.datalist = res.data.records
 				})
 			}
-			list({
+			list1({
 				current: 1,
 				size: 10
 			}).then(res => {
@@ -93,16 +93,19 @@
 					data.moer=true
 				}
 				if (scrollTop + clientHeight>= scrollHeight){
-					list({
+					list1({
 				current: 1,
 				size: 10
 			}).then(res => {
-						if(data.list.length < 60 ){
+						if(data.datalist.length < 60 ){
 							data.datalist=[...data.datalist, ...res.data.records]
 						}
 					})
 				}
 			}
+			onPageScroll((e) => {
+				data.scrollTop = e.scrollTop
+			})
 			return {
 				...toRefs(data),
 				highlight
@@ -123,17 +126,20 @@
 		box-sizing: border-box;
 
 		.left {
+			// flex: 1;
 			width: 70%;
 
 			.fir-text {
 				font-weight: 700;
-
 			}
 
 			.sec-text {
 				font-size: 25rpx;
 				color: #7e7e7e;
 				margin: 2% 0 4% 0;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
 			}
 
 			.bottom-text {
@@ -149,6 +155,7 @@
 		}
 
 		.right {
+			// width: 30%;
 			flex: 1;
 			margin-left: 2%;
 

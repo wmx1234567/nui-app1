@@ -1,5 +1,7 @@
 <template>
-	<myinput :clock="clock"></myinput>
+	<navigator  url="../search/search">
+	   <myinput :clock="clock"></myinput>
+	</navigator >
 	<swiper class="swiper" @change="img" circular indicator-dots="true" autoplay="true" interval="2000" duration="500"
 		indicator-color="rgba(225,225,225,.5)" indicator-active-color="#fff">
 		<swiper-item v-for="item,index in src" :key="index" :style="`background:${item.bgc}`">
@@ -157,23 +159,24 @@
 	}
 
 	.classification {
-		width: 100%;
+		width: 90%;
+		margin: 20rpx auto 0;
 
 		ul {
 			display: flex;
 			flex-wrap: wrap;
 			list-style: none;
 			align-items: center;
-			justify-content: center;
+			justify-content: space-between;
 
 			li {
 				width: 20%;
 				text-align: center;
 				background-color: rgba(119, 119, 119, 0.1);
-				border-radius: 5rpx;
+				border-radius: 10rpx;
 				margin: 5rpx 5rpx;
-				padding: 3px 0;
-				font-size: 16rpx;
+				padding: 10rpx 0;
+				font-size: 30rpx;
 			}
 		}
 	}
@@ -189,15 +192,14 @@
 	}
 
 	.swiper {
-		height: 300rpx;
+		height: 380rpx;
 		margin-top: 100rpx;
 	}
 
 	.swiper-item {
 		display: block;
 		width: 100%;
-		height: 300rpx;
-		line-height: 300rpx;
+		height: 400rpx;
 		text-align: center;
 	}
 

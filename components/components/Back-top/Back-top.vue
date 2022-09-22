@@ -9,13 +9,11 @@
 		reactive,
 		toRefs
 	} from 'vue'
-	import {
-		onPageScroll,onPullDownRefresh
-	} from '@dcloudio/uni-app'
+	
 	export default {
+		props:['scrollTop'],
 		setup(props, tcx) {
 			const data = reactive({
-				scrollTop:0,
 			})
 			const backtop = () => {
 				let a = document.documentElement.scrollTop;
@@ -28,9 +26,7 @@
 					}
 				}, 10);
 			}
-			onPageScroll((e) => {
-				data.scrollTop = e.scrollTop
-			})
+			
 			return {
 				...toRefs(data),
 				backtop

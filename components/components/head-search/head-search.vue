@@ -1,9 +1,11 @@
 <template>
 	<view class="view" :style="`background-color: ${clock}`">
-		<view class="input">
+		
+			<view class="input">
 			<img src="../../../static//放大镜.png">
 			搜索你想要的内容
 		</view>
+		
 	</view>
 </template>
 
