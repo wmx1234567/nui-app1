@@ -13,7 +13,6 @@ const api = (params) => {
 				uni.hideLoading()
 				resolve(res.data)
 			}
-
 		})
 	})
 }

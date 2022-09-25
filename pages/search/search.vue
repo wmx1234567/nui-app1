@@ -1,8 +1,8 @@
 <template>
 	<view class="header">
-		<img src="../../static/左箭头.png" alt="返回">
+		<img src="../../static/左箭头.png" alt="返回" @click="superior">
 		<view><input type="text" placeholder="所搜你想要的内容"><img src="../../static/放大镜.png" alt=""></view>
-		<span>取消</span>
+		<span @click="superior">取消</span>
 	</view>
 	<view class="hot">
 		<p>热门搜索</p>
@@ -24,38 +24,51 @@
 </template>
 
 <script>
-	import {reactive,toRefs} from 'vue'
+	import {useRouter} from 'vue-router'
+	import {
+		reactive,
+		toRefs
+	} from 'vue'
 	export default {
 		setup() {
 			const data = reactive({})
+			 const router = useRouter()
+			const superior = () => {
+				router.go(-1)
+			}
 			return {
-				...toRefs(data)
+				...toRefs(data),
+				superior
 			}
 		}
 	}
 </script>
 
 <style lang="scss">
-	.history{
+	.history {
 		width: 90%;
 		margin: 0 auto;
 		margin-top: 30rpx;
-		.a{
+
+		.a {
 			display: flex;
 			justify-content: space-between;
 			margin-bottom: 30rpx;
-			span:nth-child(2){
+
+			span:nth-child(2) {
 				color: #ccc;
 			}
 		}
-		ul{
+
+		ul {
 			display: flex;
 			list-style: none;
 			flex-wrap: wrap;
 			margin: 0;
 			padding: 0;
 			justify-content: space-between;
-			li{
+
+			li {
 				border: 1px solid #ccc;
 				padding: 10rpx 10rpx;
 				font-size: 26rpx;
@@ -64,21 +77,25 @@
 			}
 		}
 	}
-	.hot{
+
+	.hot {
 		width: 90%;
 		margin: 0 auto;
-		p{
+
+		p {
 			font-size: 36rpx;
 			margin-bottom: 20rpx;
 		}
-		ul{
+
+		ul {
 			display: flex;
 			list-style: none;
 			flex-wrap: wrap;
 			margin: 0;
 			padding: 0;
 			justify-content: space-between;
-			li{
+
+			li {
 				border: 1px solid #ccc;
 				padding: 10rpx 10rpx;
 				font-size: 26rpx;
@@ -102,7 +119,8 @@
 		view {
 			flex: 1;
 			position: relative;
-			img{
+
+			img {
 				position: absolute;
 				width: 40rpx;
 				height: 40rpx;

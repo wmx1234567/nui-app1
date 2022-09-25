@@ -62,6 +62,42 @@ const wait = async (item) => {
 	})
 	return data
 }
+//验证码
+const Code = async (item) => {
+	let data = await api({
+		url:'system/sms/code',
+		method: 'POST',
+		data: item
+	})
+	return data
+}
+//登录成功
+const succeeded = async (item) => {
+	let data = await api({
+		url:'auth/login',
+		method: 'POST',
+		data: item
+	})
+	return data
+}
+//修改手机号
+const modifyTel = async (item) => {
+	let data = await api({
+		url:'auth/user/mobile',
+		method: 'PUT',
+		data: item
+	})
+	return data
+}
+//修改昵称
+const modifyName = async (item) => {
+	let data = await api({
+		url:'system/user',
+		method: 'PUT',
+		data: item
+	})
+	return data
+}
 export { //这是另一种导出方式
 	swiper,
 	list,
@@ -69,5 +105,9 @@ export { //这是另一种导出方式
 	list1,
 	hot,
 	new1,
-	wait
+	wait,
+	Code,
+	succeeded,
+	modifyTel,
+	modifyName
 }
