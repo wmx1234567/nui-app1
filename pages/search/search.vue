@@ -1,7 +1,7 @@
 <template>
 	<view class="header">
 		<img src="../../static/左箭头.png" alt="返回" @click="superior">
-		<view><input type="text" placeholder="所搜你想要的内容"><img src="../../static/放大镜.png" alt=""></view>
+		<view><input @submit.native.prevent="searchAllCompany" type="text" placeholder="所搜你想要的内容"><img src="../../static/放大镜.png" alt=""></view>
 		<span @click="superior">取消</span>
 	</view>
 	<view class="hot">
@@ -36,9 +36,13 @@
 			const superior = () => {
 				router.go(-1)
 			}
+			const searchAllCompany = () => {
+				console.log(1);
+			}
 			return {
 				...toRefs(data),
-				superior
+				superior,
+				searchAllCompany
 			}
 		}
 	}

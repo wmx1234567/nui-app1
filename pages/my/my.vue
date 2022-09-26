@@ -21,14 +21,14 @@
 			</view>
 			<view class="two">
 				<ul>
-					<li><span><img src="../../static/我的订单.png">我的订单</span><img src="../../static/右箭头.png"> </li>
-					<li><span><img src="../../static/24gf-lock2.png">我的余额</span><img src="../../static/右箭头.png"> </li>
-					<li><span><img src="../../static/奖牌.png">我的学习</span><img src="../../static/右箭头.png"> </li>
+					<li @click="$router.push('/pages/order/order')"><span><img src="../../static/我的订单.png">我的订单</span><img src="../../static/右箭头.png"> </li>
+					<li @click="$router.push('/pages/order/my-balance')"><span><img src="../../static/24gf-lock2.png">我的余额</span><img src="../../static/右箭头.png"> </li>
+					<li @click="$router.push('/pages/order/study')"><span><img src="../../static/奖牌.png">我的学习</span><img src="../../static/右箭头.png"> </li>
 				</ul>
 			</view>
 			<view class="two">
 				<ul>
-					<li><span><img src="../../static/设置.png">设置</span><img src="../../static/右箭头.png"> </li>
+					<li @click="$router.push('/pages/my/setting')"><span><img src="../../static/设置.png">设置</span><img src="../../static/右箭头.png"> </li>
 					<li @click="$router.push('/pages/my/feedback')"><span><img src="../../static/意见反馈.png">意见反馈</span><img src="../../static/右箭头.png"> </li>
 				</ul>
 			</view>

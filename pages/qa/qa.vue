@@ -8,7 +8,7 @@
 				<view @click="highlight(2)" class="scroll-view-item_H uni-bg-red" :class="{bor:id==2}"><span></span>等待回答</view>
 		</view>
 		<view class="content">
-			<view class="article-item" v-for="item in list" :key="item.id">
+			<view @click="aaaa(item.id)" class="article-item" v-for="item in list" :key="item.id">
 				<h4>{{item.title}}</h4>
 				<view><span>{{item.reply}}回答.{{item.viewCount}}预览</span><span>{{item.nickName}}.{{item.createDate}}</span></view>
 			</view>
@@ -81,9 +81,19 @@
 			onPageScroll((e) => {
 				data.scrollTop = e.scrollTop
 			})
+			const aaaa = (i) =>{
+				uni.setStorage({
+					key:"id",
+					data:i
+				})
+				uni.navigateTo({
+					url: '/pages/qa/details'
+				});
+			}
 			return {
 				...toRefs(data),
-				highlight
+				highlight,
+				aaaa
 			}
 		}
 	}

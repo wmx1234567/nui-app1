@@ -11,7 +11,7 @@
 			</scroll-view>
 		</view>
 		<view class="content">
-			<view class="article-item" v-for="item in datalist" :key="item.id">
+			<view class="article-item" v-for="item in datalist" :key="item.id" @click="details(item.id)">
 				<view class="left">
 					<view class="fir-text">
 						{{item.title}}
@@ -106,9 +106,20 @@
 			onPageScroll((e) => {
 				data.scrollTop = e.scrollTop
 			})
+			const details = (i) => {
+				console.log(i);
+				uni.setStorage({
+					key: "id",
+					data:i
+				})
+				uni.navigateTo({
+					url: '/pages/read/details'
+				});
+			}
 			return {
 				...toRefs(data),
-				highlight
+				highlight,
+				details
 			}
 		}
 	}

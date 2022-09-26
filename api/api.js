@@ -98,6 +98,76 @@ const modifyName = async (item) => {
 	})
 	return data
 }
+//意见反馈
+const feedback = async (item) => {
+	let data = await api({
+		url:'system/api/feedback',
+		method: 'POST',
+		data: item
+	})
+	return data
+}
+//我的订单
+const pay = async (item) => {
+	let data = await api({
+		url:'pay/order/user/list',
+		method: 'GET',
+		data: item
+	})
+	return data
+}
+//我的余额
+const balance = async (item) => {
+	let data = await api({
+		url:'pay/user/balance',
+		method: 'GET',
+		data: item
+	})
+	return data
+}
+//我的学习
+const course = async (item) => {
+	let data = await api({
+		url:'course/course/study/list',
+		method: 'GET',
+		data: item
+	})
+	return data
+}
+//问答详情
+const article = async (id) => {
+	let data = await api({
+		url:`article/api/article/${id}`,
+		method: 'GET'
+	})
+	return data
+}
+//问答评论
+
+const articlelist = async (id) => {
+	let data = await api({
+		url:`article/api/comment/list/${id}`,
+		method: 'GET'
+	})
+	return data
+}
+//新增评论
+const comment = async (item) => {
+	let data = await api({
+		url:`article/comment`,
+		method: 'POST',
+		data: item
+	})
+	return data
+}
+//问答品论
+const question = async (id) => {
+	let data = await api({
+		url:`question/api/question/${id}`,
+		method: 'GET'
+	})
+	return data
+}
 export { //这是另一种导出方式
 	swiper,
 	list,
@@ -109,5 +179,13 @@ export { //这是另一种导出方式
 	Code,
 	succeeded,
 	modifyTel,
-	modifyName
+	modifyName,
+	feedback,
+	pay,
+	balance,
+	course,
+	article,
+	articlelist,
+	comment,
+	question
 }
