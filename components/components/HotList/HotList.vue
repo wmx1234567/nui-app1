@@ -7,7 +7,7 @@
 		</view>
 		<scroll-view class="scroll-view_H" scroll-x="true" scroll-left="0" show-scrollbar="true">
 			<view id="demo1" class="scroll-view-item_H uni-bg-red">
-				<view class="box" v-for="item in list.slice(1,6)" :key="item.id">
+				<view class="box" @click="toDetail(item.id)" v-for="item in list.slice(1,6)" :key="item.id">
 					<view class="img">
 						<img :src="item.mainImage.slice(-3)=='jpg'?`../../../static/${item.mainImage}` :item.mainImage">
 					</view>
@@ -24,7 +24,7 @@
 			</view>
 			<!-- <img src="../../../static/static/images/banner1.jpg" alt=""> -->
 			<view id="demo2" class="scroll-view-item_H uni-bg-green">
-				<view class="box" v-for="item in list.slice(5,10)" :key="item.id">
+				<view class="box" @click="toDetail(item.id)" v-for="item in list.slice(5,10)" :key="item.id">
 					<view class="img">
 						<img :src="item.mainImage.slice(-3)=='jpg'?`../../../static/${item.mainImage}` :item.mainImage">
 					</view>
@@ -57,9 +57,16 @@
 			const data = reactive({
 				list: []
 			})
+			// 跳转详情页
+			const toDetail = (id) => {
+				uni.navigateTo({
+					url:`/pages/detailView/detailView?id=${id}`
+				})
+			}
 
 			return {
-				...toRefs(data)
+				...toRefs(data),
+				toDetail
 			}
 		}
 	}

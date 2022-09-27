@@ -1,48 +1,104 @@
 <template>
 	<view class="header">
 		<img src="../../static/左箭头.png" alt="返回" @click="superior">
-		<view><input @submit.native.prevent="searchAllCompany" type="text" placeholder="所搜你想要的内容"><img src="../../static/放大镜.png" alt=""></view>
+		<view><input @blur='keydown1' type="text" placeholder="所搜你想要的内容" v-model="searchId"><img
+				src="../../static/放大镜.png" alt=""></view>
 		<span @click="superior">取消</span>
 	</view>
 	<view class="hot">
 		<p>热门搜索</p>
 		<ul>
-			<li>java</li>
-			<li>Python</li>
-			<li>Vue.js</li>
-			<li>React</li>
-			<li>SpringBoot</li>
-			<li>SpringCloud</li>
+			<li v-for="(item,index) in reList" :key="index" @click='searchClick(item.name)'>{{item.name}}</li>
 		</ul>
 	</view>
 	<view class="history">
-		<view class="a"><span>历史搜索</span><span>清空</span></view>
+		<view class="a"><span>历史搜索</span><span @click="empty">清空</span></view>
 		<ul>
-			<li>java</li>
+			<li v-for="(item,index) in searchArr" :key="index" @click='searchClick(item.name)'>{{item.name}}</li>
 		</ul>
 	</view>
 </template>
 
 <script>
-	import {useRouter} from 'vue-router'
+	import {
+		swiper
+	} from '../../api/api.js'
+	import {
+		useRouter
+	} from 'vue-router'
 	import {
 		reactive,
 		toRefs
 	} from 'vue'
 	export default {
+		onLoad() {
+			this.placeholder1 = '请输入要搜索的内容'
+			uni.getStorage({
+				key: 'key',
+				success: (res) => {
+					this.searchArr = JSON.parse(res.data)
+					// this.searchArr = res.data
+				}
+			});
+		},
 		setup() {
-			const data = reactive({})
-			 const router = useRouter()
+			const data = reactive({
+				searchId: '',
+				reList: [],
+				searchArr: [],
+			})
+			const router = useRouter()
 			const superior = () => {
 				router.go(-1)
 			}
-			const searchAllCompany = () => {
-				console.log(1);
+			swiper().then(res => {
+				console.log(res.data);
+				data.reList = res.data
+			})
+			// 点击热门搜索事件
+			const searchClick = (item) => {
+				uni.navigateTo({
+					url: `/pages/CommodityDetails/CommodityDetails?user=${item}`
+				})
+				data.searchArr.push({
+					name: item
+				})
+				uni.setStorage({
+					key: 'key',
+					data: item
+				})
+			}
+			const keydown1 = () => {
+				if (data.searchId == '' || data.searchId == 'undefined' || data.searchId == 0) {
+					uni.showToast({
+						icon: 'error',
+						title: '请输入内容',
+						mask: true
+					})
+				} else {
+					uni.navigateTo({
+						url: `/pages/CommodityDetails/CommodityDetails?user=${data.searchId}`
+					})
+					data.searchArr.push({
+						name: data.searchId
+					})
+					uni.setStorage({
+						key: 'key',
+						data: data.searchArr
+					})
+				}
+			}
+			//清空事件
+			const empty = () => {
+				localStorage.removeItem('key')
+				data.searchArr = []
 			}
 			return {
 				...toRefs(data),
 				superior,
-				searchAllCompany
+				keydown1,
+				empty,
+				searchClick
 			}
 		}
 	}
@@ -70,9 +126,11 @@
 			flex-wrap: wrap;
 			margin: 0;
 			padding: 0;
-			justify-content: space-between;
+			justify-content: space-around;
 
 			li {
+				text-align: center;
+				width: 25%;
 				border: 1px solid #ccc;
 				padding: 10rpx 10rpx;
 				font-size: 26rpx;
@@ -100,6 +158,8 @@
 			justify-content: space-between;
 
 			li {
+				width: 25%;
+				text-align: center;
 				border: 1px solid #ccc;
 				padding: 10rpx 10rpx;
 				font-size: 26rpx;

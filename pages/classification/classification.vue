@@ -9,7 +9,7 @@
 				<view @click="highlight(item)" :class="{col:id==item.id}" v-for="item in list" :key="item.id">{{item.name}}<span></span></view>
 			</view>
 			<view class="right">
-				<view v-for="item in item.labelList" :key="item.id">{{item.name}}</view>
+				<view  @click='searchClick(item.name)' v-for="item in item.labelList" :key="item.id">{{item.name}}</view>
 			</view>
 		</view>
 	</view>
@@ -34,9 +34,22 @@
 				data.id = item.id
 				data.item = item
 			}
+			const searchClick = (item) => {
+				uni.navigateTo({
+					url: `/pages/CommodityDetails/CommodityDetails?user=${item}`
+				})
+				data.searchArr.push({
+					name: item
+				})
+				uni.setStorage({
+					key: 'key',
+					data: item
+				})
+			}
 			return {
 				...toRefs(data),
-				highlight
+				highlight,
+				searchClick
 			}
 		}
 	}

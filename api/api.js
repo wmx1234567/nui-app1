@@ -168,7 +168,28 @@ const question = async (id) => {
 	})
 	return data
 }
+// 搜索的详情
+const searchXiang= async (page) => {
+	let data = await api({
+		url: `/course/api/course/search`,
+		data:{content:page},
+		method:'post',
+	})
+	return data
+	
+}
+
+// 搜索的详情的全部接口
+const searchXiangQuan= async () => {
+	let data = await api({
+		url: `article/api/category/label/list`,
+	})
+	return data
+	
+}
 export { //这是另一种导出方式
+searchXiang,
+searchXiangQuan,
 	swiper,
 	list,
 	floor,

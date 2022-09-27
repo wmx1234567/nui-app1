@@ -12,8 +12,8 @@
 	</swiper>
 	<view class="classification">
 		<ul>
-			<li v-for="item,index in fication" v-show="item.id<8">{{item.name}}</li>
-			<li>全部分类</li>
+			<li  @click='searchClick(item.name)' v-for="item,index in fication" v-show="item.id<8">{{item.name}}</li>
+			<li @click="$router.push('/pages/classification/classification')">全部分类</li>
 		</ul>
 	</view>
 	<HotList :title="Hottitle" :list="Hotlist"></HotList>
@@ -141,10 +141,23 @@
 			// 	}
 			// 	}, 10);
 			// }
-			
+			// 点击热门搜索事件
+			const searchClick = (item) => {
+				uni.navigateTo({
+					url: `/pages/CommodityDetails/CommodityDetails?user=${item}`
+				})
+				data.searchArr.push({
+					name: item
+				})
+				uni.setStorage({
+					key: 'key',
+					data: item
+				})
+			}
 			return {
 				...toRefs(data),
 				img,
+				searchClick,
 				
 			}
 		}
